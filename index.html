@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selected Works</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Hide scrollbar for the horizontal slider */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Edge-to-edge pan using object-position */
+    @keyframes slowPan {
+      0% { object-position: 0% 50%; }
+      50% { object-position: 100% 50%; }
+      100% { object-position: 0% 50%; }
+    }
+    
+    .animate-slow-pan {
+      animation: slowPan 30s ease-in-out infinite;
+    }
+    
+    /* Make animation 3x slower on mobile (from 7.5s to 22.5s) */
+    @media (max-width: 768px) {
+      .animate-slow-pan {
+        animation-duration: 22.5s;
+      }
+    }
+  </style>
+</head>
+<body class="bg-black m-0 text-white font-sans">
+  
+  <!-- Frosted Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-[100] bg-white/70 backdrop-blur-md border-b border-white/20 transition-transform duration-300 ease-in-out">
+    <div class="px-6 md:px-12 h-20 md:h-24 flex items-center justify-between">
+      
+      <!-- Left spacer -->
+      <div class="flex-1 hidden md:block"></div>
+      
+      <!-- Logo -->
+      <a href="#" class="flex-shrink-0 flex items-center justify-start md:justify-center flex-1 md:flex-none">
+        <img src="logo.png" alt="Logo" class="h-14 md:h-16 w-auto object-contain">
+      </a>
+      
+      <!-- Right Social Icons -->
+      <div class="flex-1 flex justify-end items-center space-x-5">
+        <a href="https://instagram.com" target="_blank" class="text-black hover:text-gray-600 transition-colors hover:scale-110 transform duration-300">
+          <svg class="w-6 h-6 md:w-7 md:h-7" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" class="text-black hover:text-gray-600 transition-colors hover:scale-110 transform duration-300">
+          <svg class="w-6 h-6 md:w-7 md:h-7" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Slider Section -->
+  <div class="relative w-full h-screen">
+    
+    <!-- Full Screen Carousel Container -->
+    <div id="carousel" class="flex w-full h-full overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth">
+      <!-- Loading Screen -->
+      <div id="loading" class="w-full h-screen flex flex-col items-center justify-center snap-center shrink-0">
+          <svg class="animate-spin h-10 w-10 text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p class="text-white text-lg font-semibold tracking-widest uppercase">Loading Projects</p>
+      </div>
+    </div>
+
+    <!-- Desktop Navigation Arrows -->
+    <button id="prev-btn" class="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-50 w-14 h-14 items-center justify-center bg-black/40 hover:bg-black/70 border border-white/20 rounded-full transition-all duration-300 backdrop-blur-sm group cursor-pointer">
+      <svg class="w-6 h-6 transform group-hover:-translate-x-1 transition-transform text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button id="next-btn" class="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-50 w-14 h-14 items-center justify-center bg-black/40 hover:bg-black/70 border border-white/20 rounded-full transition-all duration-300 backdrop-blur-sm group cursor-pointer">
+      <svg class="w-6 h-6 transform group-hover:translate-x-1 transition-transform text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+    <!-- Dots Indicators -->
+    <div id="dots-container" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center space-x-3 bg-black/30 px-5 py-3 rounded-full backdrop-blur-md border border-white/10">
+      <!-- Dots injected dynamically -->
+    </div>
+
+  </div>
+
+  <!-- About Section -->
+  <section class="w-full bg-black flex flex-col items-center justify-center px-8 py-32 text-center border-t border-white/10">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white uppercase tracking-widest">About Me</h2>
+      <p class="text-white text-lg md:text-xl leading-relaxed font-light">
+        I am a designer and developer passionate about creating digital experiences that merge clean aesthetics with robust functionality. My work bridges the gap between interactive design and systematic engineering.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="w-full bg-black flex flex-col items-center justify-center px-8 py-32 text-white border-t border-white/10">
+    <div class="w-full max-w-2xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center uppercase tracking-widest text-white">Get In Touch</h2>
+      
+      <form action="https://formsubmit.co/your@email.com" method="POST" class="flex flex-col space-y-8">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New message from portfolio website!">
+
+        <div class="relative">
+          <label for="name" class="block text-xs font-bold mb-2 uppercase tracking-widest text-white/60">Name</label>
+          <input type="text" id="name" name="name" required class="w-full border-b-2 border-white/20 bg-transparent py-2 text-lg focus:outline-none focus:border-white transition-colors">
+        </div>
+        
+        <div class="relative">
+          <label for="email" class="block text-xs font-bold mb-2 uppercase tracking-widest text-white/60">Email</label>
+          <input type="email" id="email" name="email" required class="w-full border-b-2 border-white/20 bg-transparent py-2 text-lg focus:outline-none focus:border-white transition-colors">
+        </div>
+
+        <div class="relative">
+          <label for="telephone" class="block text-xs font-bold mb-2 uppercase tracking-widest text-white/60">Telephone</label>
+          <input type="tel" id="telephone" name="telephone" class="w-full border-b-2 border-white/20 bg-transparent py-2 text-lg focus:outline-none focus:border-white transition-colors">
+        </div>
+
+        <div class="relative pt-4">
+          <label for="message" class="block text-xs font-bold mb-4 uppercase tracking-widest text-white/60">Message</label>
+          <textarea id="message" name="message" rows="5" required class="w-full border-2 border-white/20 bg-transparent p-4 text-lg focus:outline-none focus:border-white transition-colors resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="self-start md:self-center px-12 py-5 bg-white text-black text-sm tracking-widest font-bold uppercase rounded-full hover:bg-gray-200 hover:scale-105 transition-all duration-300 w-full md:w-auto mt-4">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="w-full bg-black py-32 px-8 text-white border-t border-white/10">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center uppercase tracking-widest text-white">Expertise & Process</h2>
+      
+      <div id="faq-container" class="space-y-4">
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
+            What defines your architectural approach for luxury properties?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
+            We prioritize a synthesis of contemporary minimalism and site-responsive design, ensuring each residence is a bespoke masterpiece that honors both structural integrity and the unique identity of its owner.
+          </div>
+        </div>
+        
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
+            Do you manage projects across all Egyptian governorates?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
+            Yes, we provide turnkey architectural services across Egypt, with a specialized focus on high-end developments in Cairo, the North Coast, and emerging luxury administrative hubs.
+          </div>
+        </div>
+
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
+            How do you integrate sustainability into A+ residential design?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
+            We utilize passive cooling techniques, energy-efficient smart home integration, and locally sourced high-performance materials to create homes that are environmentally conscious without compromising on opulence.
+          </div>
+        </div>
+
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
+            What is the typical timeline for a custom luxury villa?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
+            For bespoke A+ projects, we follow a rigorous 18 to 24-month roadmap, encompassing concept development, permit acquisition, detailed execution design, and comprehensive site supervision.
+          </div>
+        </div>
+
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
+            Can you assist with high-end interior and landscape design?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
+            We provide a holistic service model where the architecture, interior fit-out, and landscape design are curated to ensure a seamless aesthetic flow from the outer envelope to the innermost detail.
+          </div>
+        </div>
+
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
+            How do you ensure confidentiality for high-profile clients?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
+            Discretion is the cornerstone of our practice. We maintain strict non-disclosure protocols and provide secure, private digital project management portals for all our A+ clientele.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // --- Navbar Hide on Scroll Logic ---
+    const navbar = document.getElementById('navbar');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        navbar.style.transform = 'translateY(-100%)';
+      } else {
+        navbar.style.transform = 'translateY(0)';
+      }
+      
+      lastScrollY = currentScrollY;
+    });
+
+    // --- FAQ Accordion Logic ---
+    document.querySelectorAll('.faq-item button').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('span');
+        
+        content.classList.toggle('hidden');
+        icon.textContent = content.classList.contains('hidden') ? '+' : '−';
+      });
+    });
+
+    // --- Slider Logic (JSON Fetch) ---
+    async function loadBehanceSlider() {
+      const carousel = document.getElementById('carousel');
+      const loading = document.getElementById('loading');
+      const dotsContainer = document.getElementById('dots-container');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      
+      try {
+        // Now fetching from the local JSON file created by your scraper script
+        const response = await fetch('./portfolio.json');
+        const allItems = await response.json();
+        
+        const items = allItems.slice(0, 6);
+        const totalItems = items.length;
+        
+        loading.remove();
+        
+        items.forEach((item, index) => {
+          // Data is already mapped cleanly by the puppeteer script
+          const title = item.title || "Untitled";
+          const link = item.link || "#";
+          const imgSrc = item.image || "";
+
+          const slide = `
+            <div class="relative w-full h-full shrink-0 snap-center flex items-center justify-center overflow-hidden bg-gray-900">
+              <img src="${imgSrc}" alt="${title}" class="absolute inset-0 w-full h-full object-cover animate-slow-pan pointer-events-none">
+              
+              <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
+              
+              <div class="absolute bottom-0 left-0 w-full p-8 md:p-16 pb-28 md:pb-28 flex flex-col justify-end h-full pointer-events-none">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 drop-shadow-2xl pointer-events-auto w-full md:w-3/4 leading-tight tracking-tight">
+                  ${title}
+                </h2>
+                <a href="${link}" target="_blank" class="pointer-events-auto inline-flex items-center justify-center px-8 py-4 text-sm md:text-base font-bold text-black bg-white rounded-full hover:bg-gray-200 hover:scale-105 transition-all duration-300 w-max shadow-2xl">
+                  View full project
+                  <svg class="w-4 h-4 ml-2 md:ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          `;
+          carousel.insertAdjacentHTML('beforeend', slide);
+
+          const dot = document.createElement('button');
+          dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 bg-white/40 hover:bg-white/80 cursor-pointer`;
+          if (index === 0) dot.classList.add('bg-white', 'w-8'); 
+          
+          dot.addEventListener('click', () => {
+            carousel.scrollTo({
+              left: carousel.clientWidth * index,
+              behavior: 'smooth'
+            });
+          });
+          dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll('button');
+        carousel.addEventListener('scroll', () => {
+          const activeIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
+          dots.forEach((dot, idx) => {
+            if (idx === activeIndex) {
+              dot.classList.replace('bg-white/40', 'bg-white');
+              dot.classList.add('w-8');
+            } else {
+              dot.classList.replace('bg-white', 'bg-white/40');
+              dot.classList.remove('w-8');
+            }
+          });
+        });
+
+        prevBtn.addEventListener('click', () => {
+          const currentIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
+          if (currentIndex <= 0) {
+            carousel.scrollTo({ left: carousel.clientWidth * (totalItems - 1), behavior: 'smooth' });
+          } else {
+            carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
+          }
+        });
+
+        nextBtn.addEventListener('click', () => {
+          const currentIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
+          if (currentIndex >= totalItems - 1) {
+            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+          }
+        });
+        
+      } catch (error) {
+        console.error("Error loading portfolio:", error);
+        loading.innerHTML = '<p class="text-red-500 text-xl font-bold">Failed to load projects. Ensure portfolio.json exists in the public folder.</p>';
+      }
+    }
+
+    loadBehanceSlider();
+  </script>
+</body>
+</html>
