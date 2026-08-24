@@ -241,7 +241,7 @@
       });
     });
 
-    // --- Slider Logic (JSON Fetch) ---
+    // --- Slider Logic (Zero Maintenance Fetch via RSS2JSON) ---
     async function loadBehanceSlider() {
       const carousel = document.getElementById('carousel');
       const loading = document.getElementById('loading');
@@ -250,20 +250,34 @@
       const nextBtn = document.getElementById('next-btn');
       
       try {
-        // Now fetching from the local JSON file created by your scraper script
-        const response = await fetch('./portfolio.json');
-        const allItems = await response.json();
+        // This free API converts your Behance RSS safely into JSON on the fly
+        const behanceRss = 'https://www.behance.net/feeds/user?username=osamaeltawelvision';
+        const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(behanceRss)}`;
         
-        const items = allItems.slice(0, 6);
+        const response = await fetch(proxyUrl);
+        const data = await response.json();
+        
+        if (data.status !== 'ok') {
+          throw new Error("Failed to fetch RSS data");
+        }
+        
+        const items = data.items.slice(0, 6);
         const totalItems = items.length;
         
         loading.remove();
         
         items.forEach((item, index) => {
-          // Data is already mapped cleanly by the puppeteer script
           const title = item.title || "Untitled";
           const link = item.link || "#";
-          const imgSrc = item.image || "";
+          
+          // rss2json extracts the image into thumbnail, but we fallback to the content just in case
+          let imgSrc = item.thumbnail || ""; 
+          if (!imgSrc) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = item.content || item.description || "";
+            const imgElement = tempDiv.querySelector('img');
+            if (imgElement) imgSrc = imgElement.src;
+          }
 
           const slide = `
             <div class="relative w-full h-full shrink-0 snap-center flex items-center justify-center overflow-hidden bg-gray-900">
@@ -334,11 +348,12 @@
         
       } catch (error) {
         console.error("Error loading portfolio:", error);
-        loading.innerHTML = '<p class="text-red-500 text-xl font-bold">Failed to load projects. Ensure portfolio.json exists in the public folder.</p>';
+        loading.innerHTML = '<p class="text-red-500 text-xl font-bold">Failed to load projects. Please try refreshing.</p>';
       }
     }
 
     loadBehanceSlider();
   </script>
+
 </body>
 </html>
