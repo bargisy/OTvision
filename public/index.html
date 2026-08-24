@@ -241,7 +241,7 @@
       });
     });
 
-    // --- Slider Logic (Zero Maintenance Fetch via RSS2JSON) ---
+    // --- Slider Logic ---
     async function loadBehanceSlider() {
       const carousel = document.getElementById('carousel');
       const loading = document.getElementById('loading');
@@ -250,31 +250,35 @@
       const nextBtn = document.getElementById('next-btn');
       
       try {
-        // This free API converts your Behance RSS safely into JSON on the fly
-        const behanceRss = 'https://www.behance.net/feeds/user?username=osamaeltawelvision';
-        const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(behanceRss)}`;
+        // Fetching directly from your custom Cloudflare Worker Proxy
+        const myWorkerUrl = 'https://behance-proxy.m-bargisy.workers.dev/';
         
-        const response = await fetch(proxyUrl);
-        const data = await response.json();
+        const response = await fetch(myWorkerUrl);
+        if (!response.ok) throw new Error("Worker failed to fetch data");
         
-        if (data.status !== 'ok') {
-          throw new Error("Failed to fetch RSS data");
-        }
+        const xmlText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+        const allItems = xmlDoc.querySelectorAll("item");
         
-        const items = data.items.slice(0, 6);
+        const items = Array.from(allItems).slice(0, 6);
         const totalItems = items.length;
         
         loading.remove();
         
         items.forEach((item, index) => {
-          const title = item.title || "Untitled";
-          const link = item.link || "#";
+          const title = item.querySelector("title")?.textContent || "Untitled";
+          const link = item.querySelector("link")?.textContent || "#";
           
-          // rss2json extracts the image into thumbnail, but we fallback to the content just in case
-          let imgSrc = item.thumbnail || ""; 
-          if (!imgSrc) {
+          let imgSrc = ''; 
+          const mediaTag = item.getElementsByTagName("media:content")[0];
+          
+          if (mediaTag && mediaTag.getAttribute("url")) {
+            imgSrc = mediaTag.getAttribute("url");
+          } else {
+            const description = item.querySelector("description")?.textContent || "";
             const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = item.content || item.description || "";
+            tempDiv.innerHTML = description;
             const imgElement = tempDiv.querySelector('img');
             if (imgElement) imgSrc = imgElement.src;
           }
@@ -282,19 +286,13 @@
           const slide = `
             <div class="relative w-full h-full shrink-0 snap-center flex items-center justify-center overflow-hidden bg-gray-900">
               <img src="${imgSrc}" alt="${title}" class="absolute inset-0 w-full h-full object-cover animate-slow-pan pointer-events-none">
-              
               <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
               <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
-              
               <div class="absolute bottom-0 left-0 w-full p-8 md:p-16 pb-28 md:pb-28 flex flex-col justify-end h-full pointer-events-none">
-                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 drop-shadow-2xl pointer-events-auto w-full md:w-3/4 leading-tight tracking-tight">
-                  ${title}
-                </h2>
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 drop-shadow-2xl pointer-events-auto w-full md:w-3/4 leading-tight tracking-tight">${title}</h2>
                 <a href="${link}" target="_blank" class="pointer-events-auto inline-flex items-center justify-center px-8 py-4 text-sm md:text-base font-bold text-black bg-white rounded-full hover:bg-gray-200 hover:scale-105 transition-all duration-300 w-max shadow-2xl">
                   View full project
-                  <svg class="w-4 h-4 ml-2 md:ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                  </svg>
+                  <svg class="w-4 h-4 ml-2 md:ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
               </div>
             </div>
@@ -305,15 +303,11 @@
           dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 bg-white/40 hover:bg-white/80 cursor-pointer`;
           if (index === 0) dot.classList.add('bg-white', 'w-8'); 
           
-          dot.addEventListener('click', () => {
-            carousel.scrollTo({
-              left: carousel.clientWidth * index,
-              behavior: 'smooth'
-            });
-          });
+          dot.addEventListener('click', () => carousel.scrollTo({ left: carousel.clientWidth * index, behavior: 'smooth' }));
           dotsContainer.appendChild(dot);
         });
 
+        // Initialize dots and scroll listeners
         const dots = dotsContainer.querySelectorAll('button');
         carousel.addEventListener('scroll', () => {
           const activeIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
@@ -330,30 +324,23 @@
 
         prevBtn.addEventListener('click', () => {
           const currentIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
-          if (currentIndex <= 0) {
-            carousel.scrollTo({ left: carousel.clientWidth * (totalItems - 1), behavior: 'smooth' });
-          } else {
-            carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
-          }
+          if (currentIndex <= 0) carousel.scrollTo({ left: carousel.clientWidth * (totalItems - 1), behavior: 'smooth' });
+          else carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
         });
 
         nextBtn.addEventListener('click', () => {
           const currentIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
-          if (currentIndex >= totalItems - 1) {
-            carousel.scrollTo({ left: 0, behavior: 'smooth' });
-          } else {
-            carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
-          }
+          if (currentIndex >= totalItems - 1) carousel.scrollTo({ left: 0, behavior: 'smooth' });
+          else carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
         });
         
       } catch (error) {
         console.error("Error loading portfolio:", error);
-        loading.innerHTML = '<p class="text-red-500 text-xl font-bold">Failed to load projects. Please try refreshing.</p>';
+        loading.innerHTML = '<p class="text-red-500 text-xl font-bold">Failed to load projects.</p>';
       }
     }
 
     loadBehanceSlider();
   </script>
-
 </body>
 </html>
