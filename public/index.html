@@ -36,6 +36,11 @@
         animation-duration: 22.5s;
       }
     }
+    
+    /* Smooth scrolling for the ghost button link */
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
 <body class="bg-black m-0 text-white font-sans">
@@ -72,9 +77,19 @@
   <section class="relative w-full h-screen flex flex-col justify-center px-8 bg-cover bg-[85%_center] md:bg-center bg-no-repeat" style="background-image: url('OT.jpg');">
     <div class="relative max-w-4xl mx-auto w-full text-left z-10 pt-20">
       <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white uppercase tracking-widest drop-shadow-lg">Behind the Studio</h2>
+      
       <p class="text-white text-xl md:text-3xl leading-relaxed font-light drop-shadow-md">
-        Osama El Taweel transforms spaces into personalized functional stories bridging timeless elegance with reality. Crafted with precision, driven by ambition.
+        Osama El Taweel transforms spaces into personalized functional stories bridging timeless elegance with reality.
       </p>
+      
+      <p class="text-white/80 text-lg md:text-xl font-light tracking-wide drop-shadow-md mt-4">
+        Crafted with precision, driven by ambition.
+      </p>
+
+      <!-- Ghost Button CTA -->
+      <a href="#contact" class="inline-block mt-10 px-10 py-4 border border-white text-white text-sm tracking-widest font-bold uppercase hover:bg-white hover:text-black transition-all duration-300 drop-shadow-md shadow-[0_0_15px_rgba(0,0,0,0.3)] w-max">
+        Get In Touch
+      </a>
     </div>
   </section>
 
@@ -253,7 +268,7 @@
   </section>
 
   <!-- Contact Form Section -->
-  <section class="w-full bg-black flex flex-col items-center justify-center px-8 py-32 text-white border-t border-white/10">
+  <section id="contact" class="w-full bg-black flex flex-col items-center justify-center px-8 py-32 text-white border-t border-white/10">
     <div class="w-full max-w-2xl mx-auto">
       <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center uppercase tracking-widest text-white">Get In Touch</h2>
       
