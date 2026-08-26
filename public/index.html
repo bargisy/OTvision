@@ -286,7 +286,12 @@
             if (imgElement) imgSrc = imgElement.src;
           }
 
-          // SPEED OPTIMIZATIONS: Force high priority on the 1st image, lazy load the rest
+          // Force Behance to serve compressed, web-optimized 1200px images instead of 10MB originals
+          if (imgSrc.includes('/original/') || imgSrc.includes('/fs/')) {
+            imgSrc = imgSrc.replace('/original/', '/max_1200/').replace('/fs/', '/max_1200/');
+          }
+
+          // Load first image instantly, defer the rest
           const loadPriority = index === 0 ? 'fetchpriority="high"' : 'loading="lazy"';
 
           const slide = `
@@ -313,7 +318,6 @@
           dotsContainer.appendChild(dot);
         });
 
-        // Initialize dots and scroll listeners
         const dots = dotsContainer.querySelectorAll('button');
         carousel.addEventListener('scroll', () => {
           const activeIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
