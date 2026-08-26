@@ -103,12 +103,120 @@
   </div>
 
   <!-- About Section -->
-  <section class="w-full bg-black flex flex-col items-center justify-center px-8 py-32 text-center border-t border-white/10">
-    <div class="max-w-3xl mx-auto">
+  <section class="relative w-full flex flex-col justify-center px-8 py-40 border-t border-white/10 bg-cover bg-center bg-no-repeat" style="background-image: url('OT.jpg');">
+    <!-- Dark overlay to ensure text is always readable over the background image -->
+    <div class="absolute inset-0 bg-black/70"></div>
+    
+    <div class="relative max-w-4xl mx-auto w-full text-left z-10">
       <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white uppercase tracking-widest">About Me</h2>
-      <p class="text-white text-lg md:text-xl leading-relaxed font-light">
-        I am a designer and developer passionate about creating digital experiences that merge clean aesthetics with robust functionality. My work bridges the gap between interactive design and systematic engineering.
+      <p class="text-white text-xl md:text-3xl leading-relaxed font-light">
+        Osama El Taweel transforms spaces into personalized functional stories bridging timeless elegance with reality Crafted with precision, driven by ambition.
       </p>
+    </div>
+  </section>
+
+  <!-- Talents Section -->
+  <section class="w-full bg-black flex flex-col justify-center px-8 py-32 border-t border-white/10">
+    <div class="max-w-4xl mx-auto w-full text-left">
+      <h2 class="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest">Talents</h2>
+      
+      <div class="space-y-10">
+        <p class="text-white/70 text-lg md:text-xl leading-relaxed tracking-wider uppercase font-light">
+          <strong class="text-white font-bold block mb-2">A KEEN EYE FOR DETAIL:</strong> 
+          SPOTTING PERFECTION IN THE FINEST FINISHING AND MATERIAL CHOICES.
+        </p>
+        
+        <p class="text-white/70 text-lg md:text-xl leading-relaxed tracking-wider uppercase font-light">
+          <strong class="text-white font-bold block mb-2">SPATIAL TRANSFORMATION:</strong> 
+          TURNING ORDINARY AREAS INTO HIGHLY PERSONALIZED AND FUNCTIONAL LUXURY SPACES.
+        </p>
+        
+        <p class="text-white/70 text-lg md:text-xl leading-relaxed tracking-wider uppercase font-light">
+          <strong class="text-white font-bold block mb-2">CULTURAL INTEGRATION:</strong> 
+          SEAMLESSLY BLENDING RICH EGYPTIAN HERITAGE WITH MODERN ARCHITECTURAL TRENDS.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ambition Section -->
+  <section class="w-full bg-black flex flex-col justify-center px-8 py-32 border-t border-white/10">
+    <div class="max-w-4xl mx-auto w-full text-left">
+      <h2 class="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest">Ambition</h2>
+      
+      <p class="text-white/70 text-lg md:text-xl leading-relaxed tracking-wider uppercase font-light">
+        <strong class="text-white font-bold block mb-2">REDEFINING THE DESIGN & BUILD CONCEPT:</strong> 
+        CHANGING HOW PEOPLE PERCEIVE INTERIOR DESIGN BY OFFERING AN ALL-INCLUSIVE, FLAWLESS EXECUTION UNDER ONE TRUSTED ROOF.
+      </p>
+    </div>
+  </section>
+
+  <!-- Expertise & Process (FAQ) Section -->
+  <section class="w-full bg-black py-32 px-8 text-white border-t border-white/10">
+    <div class="max-w-4xl mx-auto text-left">
+      <h2 class="text-4xl md:text-5xl font-bold mb-16 uppercase tracking-widest text-white">Expertise & Process</h2>
+      
+      <div id="faq-container" class="space-y-4">
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity uppercase tracking-wider">
+            What defines your architectural approach for luxury properties?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed font-light max-w-3xl">
+            We prioritize a synthesis of contemporary minimalism and site-responsive design, ensuring each residence is a bespoke masterpiece that honors both structural integrity and the unique identity of its owner.
+          </div>
+        </div>
+        
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity uppercase tracking-wider">
+            Do you manage projects across all Egyptian governorates?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed font-light max-w-3xl">
+            Yes, we provide turnkey architectural services across Egypt, with a specialized focus on high-end developments in Cairo, the North Coast, and emerging luxury administrative hubs.
+          </div>
+        </div>
+
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity uppercase tracking-wider">
+            How do you integrate sustainability into A+ residential design?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed font-light max-w-3xl">
+            We utilize passive cooling techniques, energy-efficient smart home integration, and locally sourced high-performance materials to create homes that are environmentally conscious without compromising on opulence.
+          </div>
+        </div>
+
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity uppercase tracking-wider">
+            What is the typical timeline for a custom luxury villa?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed font-light max-w-3xl">
+            For bespoke A+ projects, we follow a rigorous 18 to 24-month roadmap, encompassing concept development, permit acquisition, detailed execution design, and comprehensive site supervision.
+          </div>
+        </div>
+
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity uppercase tracking-wider">
+            Can you assist with high-end interior and landscape design?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed font-light max-w-3xl">
+            We provide a holistic service model where the architecture, interior fit-out, and landscape design are curated to ensure a seamless aesthetic flow from the outer envelope to the innermost detail.
+          </div>
+        </div>
+
+        <div class="faq-item border-b border-white/10">
+          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity uppercase tracking-wider">
+            How do you ensure confidentiality for high-profile clients?
+            <span class="text-2xl font-light">+</span>
+          </button>
+          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed font-light max-w-3xl">
+            Discretion is the cornerstone of our practice. We maintain strict non-disclosure protocols and provide secure, private digital project management portals for all our A+ clientele.
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -145,75 +253,6 @@
           Send Message
         </button>
       </form>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="w-full bg-black py-32 px-8 text-white border-t border-white/10">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center uppercase tracking-widest text-white">Expertise & Process</h2>
-      
-      <div id="faq-container" class="space-y-4">
-        <div class="faq-item border-b border-white/10">
-          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
-            What defines your architectural approach for luxury properties?
-            <span class="text-2xl font-light">+</span>
-          </button>
-          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
-            We prioritize a synthesis of contemporary minimalism and site-responsive design, ensuring each residence is a bespoke masterpiece that honors both structural integrity and the unique identity of its owner.
-          </div>
-        </div>
-        
-        <div class="faq-item border-b border-white/10">
-          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
-            Do you manage projects across all Egyptian governorates?
-            <span class="text-2xl font-light">+</span>
-          </button>
-          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
-            Yes, we provide turnkey architectural services across Egypt, with a specialized focus on high-end developments in Cairo, the North Coast, and emerging luxury administrative hubs.
-          </div>
-        </div>
-
-        <div class="faq-item border-b border-white/10">
-          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
-            How do you integrate sustainability into A+ residential design?
-            <span class="text-2xl font-light">+</span>
-          </button>
-          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
-            We utilize passive cooling techniques, energy-efficient smart home integration, and locally sourced high-performance materials to create homes that are environmentally conscious without compromising on opulence.
-          </div>
-        </div>
-
-        <div class="faq-item border-b border-white/10">
-          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
-            What is the typical timeline for a custom luxury villa?
-            <span class="text-2xl font-light">+</span>
-          </button>
-          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
-            For bespoke A+ projects, we follow a rigorous 18 to 24-month roadmap, encompassing concept development, permit acquisition, detailed execution design, and comprehensive site supervision.
-          </div>
-        </div>
-
-        <div class="faq-item border-b border-white/10">
-          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
-            Can you assist with high-end interior and landscape design?
-            <span class="text-2xl font-light">+</span>
-          </button>
-          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
-            We provide a holistic service model where the architecture, interior fit-out, and landscape design are curated to ensure a seamless aesthetic flow from the outer envelope to the innermost detail.
-          </div>
-        </div>
-
-        <div class="faq-item border-b border-white/10">
-          <button class="w-full text-left py-6 flex justify-between items-center text-lg md:text-xl font-semibold hover:opacity-60 transition-opacity">
-            How do you ensure confidentiality for high-profile clients?
-            <span class="text-2xl font-light">+</span>
-          </button>
-          <div class="faq-content hidden pb-6 text-white/60 leading-relaxed max-w-2xl">
-            Discretion is the cornerstone of our practice. We maintain strict non-disclosure protocols and provide secure, private digital project management portals for all our A+ clientele.
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
