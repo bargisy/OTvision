@@ -241,7 +241,7 @@
       });
     });
 
-    // --- Slider Logic (RSSHub Fetch) ---
+    // --- Slider Logic (Cloudflare Worker Fetch) ---
     async function loadBehanceSlider() {
       const carousel = document.getElementById('carousel');
       const loading = document.getElementById('loading');
@@ -250,11 +250,11 @@
       const nextBtn = document.getElementById('next-btn');
       
       try {
-        // Utilizing the public RSSHub instance for your Behance profile
-        const rssHubUrl = 'https://rsshub.app/behance/osamaeltawelvision';
+        // Points to your personal Cloudflare Worker proxy
+        const proxyUrl = 'https://delicate-bread-cb99.m-bargisy.workers.dev/';
         
-        const response = await fetch(rssHubUrl);
-        if (!response.ok) throw new Error("RSSHub failed to fetch data");
+        const response = await fetch(proxyUrl);
+        if (!response.ok) throw new Error("Proxy failed to fetch data");
         
         const xmlText = await response.text();
         const parser = new DOMParser();
@@ -271,15 +271,16 @@
           const link = item.querySelector("link")?.textContent || "#";
           
           let imgSrc = ''; 
+          const mediaTag = item.getElementsByTagName("media:content")[0];
           
-          // RSSHub embeds the project images directly into the HTML description block
-          const description = item.querySelector("description")?.textContent || "";
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = description;
-          const imgElement = tempDiv.querySelector('img');
-          
-          if (imgElement && !imgElement.src.includes('data:image')) {
-            imgSrc = imgElement.src;
+          if (mediaTag && mediaTag.getAttribute("url")) {
+            imgSrc = mediaTag.getAttribute("url");
+          } else {
+            const description = item.querySelector("description")?.textContent || "";
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = description;
+            const imgElement = tempDiv.querySelector('img');
+            if (imgElement) imgSrc = imgElement.src;
           }
 
           const slide = `
@@ -335,7 +336,7 @@
         
       } catch (error) {
         console.error("Error loading portfolio:", error);
-        loading.innerHTML = '<p class="text-red-500 text-xl font-bold">Failed to load projects. Behance may be blocking public requests.</p>';
+        loading.innerHTML = '<p class="text-red-500 text-xl font-bold">Failed to load projects. Please try refreshing.</p>';
       }
     }
 
