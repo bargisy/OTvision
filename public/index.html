@@ -68,8 +68,20 @@
     </div>
   </nav>
 
+  <!-- Behind the Studio Section -->
+  <section class="relative w-full h-screen flex flex-col justify-center px-8 bg-cover bg-center bg-no-repeat" style="background-image: url('OT.jpg');">
+    <!-- Removed black overlay so the image shows clearly -->
+    <div class="relative max-w-4xl mx-auto w-full text-left z-10">
+      <!-- Added drop shadow to text to maintain legibility over the raw image -->
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white uppercase tracking-widest drop-shadow-lg">Behind the Studio</h2>
+      <p class="text-white text-xl md:text-3xl leading-relaxed font-light drop-shadow-md">
+        Osama El Taweel transforms spaces into personalized functional stories bridging timeless elegance with reality Crafted with precision, driven by ambition.
+      </p>
+    </div>
+  </section>
+
   <!-- Hero Slider Section -->
-  <div class="relative w-full h-screen">
+  <div class="relative w-full h-screen border-t border-white/10">
     
     <!-- Full Screen Carousel Container -->
     <div id="carousel" class="flex w-full h-full overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth">
@@ -101,19 +113,6 @@
     </div>
 
   </div>
-
-  <!-- About Section -->
-  <section class="relative w-full flex flex-col justify-center px-8 py-40 border-t border-white/10 bg-cover bg-center bg-no-repeat" style="background-image: url('OT.jpg');">
-    <!-- Dark overlay to ensure text is always readable over the background image -->
-    <div class="absolute inset-0 bg-black/70"></div>
-    
-    <div class="relative max-w-4xl mx-auto w-full text-left z-10">
-      <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white uppercase tracking-widest">About Me</h2>
-      <p class="text-white text-xl md:text-3xl leading-relaxed font-light">
-        Osama El Taweel transforms spaces into personalized functional stories bridging timeless elegance with reality Crafted with precision, driven by ambition.
-      </p>
-    </div>
-  </section>
 
   <!-- Talents Section -->
   <section class="w-full bg-black flex flex-col justify-center px-8 py-32 border-t border-white/10">
@@ -325,12 +324,10 @@
             if (imgElement) imgSrc = imgElement.src;
           }
 
-          // Force Behance to serve compressed, web-optimized 1200px images instead of 10MB originals
           if (imgSrc.includes('/original/') || imgSrc.includes('/fs/')) {
             imgSrc = imgSrc.replace('/original/', '/max_1200/').replace('/fs/', '/max_1200/');
           }
 
-          // Load first image instantly, defer the rest
           const loadPriority = index === 0 ? 'fetchpriority="high"' : 'loading="lazy"';
 
           const slide = `
