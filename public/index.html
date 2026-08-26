@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Selected Works</title>
-  <!-- Preconnect to Behance image CDN -->
+  
+  <!-- Preconnect to Behance image CDN to speed up DNS resolution -->
   <link rel="preconnect" href="https://mir-s3-cdn-cf.behance.net">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* Hide scrollbar for the horizontal slider */
@@ -243,7 +245,7 @@
       });
     });
 
-    // --- Slider Logic (Cloudflare Worker Fetch) ---
+    // --- Slider Logic ---
     async function loadBehanceSlider() {
       const carousel = document.getElementById('carousel');
       const loading = document.getElementById('loading');
@@ -252,7 +254,6 @@
       const nextBtn = document.getElementById('next-btn');
       
       try {
-        // Points to your personal Cloudflare Worker proxy
         const proxyUrl = 'https://delicate-bread-cb99.m-bargisy.workers.dev/';
         
         const response = await fetch(proxyUrl);
@@ -285,9 +286,12 @@
             if (imgElement) imgSrc = imgElement.src;
           }
 
+          // SPEED OPTIMIZATIONS: Force high priority on the 1st image, lazy load the rest
+          const loadPriority = index === 0 ? 'fetchpriority="high"' : 'loading="lazy"';
+
           const slide = `
             <div class="relative w-full h-full shrink-0 snap-center flex items-center justify-center overflow-hidden bg-gray-900">
-              <img src="${imgSrc}" alt="${title}" class="absolute inset-0 w-full h-full object-cover animate-slow-pan pointer-events-none">
+              <img src="${imgSrc}" alt="${title}" ${loadPriority} decoding="async" class="absolute inset-0 w-full h-full object-cover animate-slow-pan pointer-events-none">
               <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
               <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
               <div class="absolute bottom-0 left-0 w-full p-8 md:p-16 pb-28 md:pb-28 flex flex-col justify-end h-full pointer-events-none">
